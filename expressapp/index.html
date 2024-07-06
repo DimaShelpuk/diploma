@@ -1,56 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Safety work</title>
-    <link rel="stylesheet" href="style/style.css">
-    
+    <title>Регистрация</title>
+    <meta charset="utf-8" />
 </head>
-
 <body>
-   <div class= "blank">
-      <h3>Создание бланка</h3> 
-       <p>ФИО <input type="text" name="userName" placeholder="Введите ФИО" size="18" /></p>
-       <p>Должность <input type="text" name="userPhone" placeholder="Введите должность" size="18" /></p>
-        <p>Разряд(если таковой имеется) <input type="radio" value="2" checked name="discharge"/>2 
-                                        <input type="radio" value="3" checked name="discharge"/>3 
-                                        <input type="radio" value="4" checked name="discharge"/>4 
-                                        <input type="radio" value="5" checked name="discharge"/>5 
-                                        <input type="radio" value="6" checked name="discharge"/>6 
-        </p>
-        <p>Группа по электробезопасности <input type="radio" value="I" checked name="electroGroup"/>I 
-                                         <input type="radio" value="II" checked name="electroGroup"/>II
-                                         <input type="radio" value="III" checked name="electroGroup"/>III 
-                                         <input type="radio" value="IV" checked name="electroGroup"/>IV 
-                                         <input type="radio" value="V" checked name="electroGroup"/>V  
-        </p>
-        <p>Цех работника                 <input type="radio" value="electro" checked name="workshop"/>Электроцех 
-                                         <input type="radio" value="ССR" checked name="workshop"/>ЦЦР
-                                         <input type="radio" value="CTPK" checked name="workshop"/>ЦТПКиРСР 
-                                         <input type="radio" value="Xim" checked name="workshop"/>Хим цех 
-                                         <input type="radio" value="KTC" checked name="workshop"/>КТЦ</p>
-   
-        <p>Электронный адрес(почта) <input type="email" placeholder="user@gmail.com" id="email" name="email"/></p>
-        
-        <p>     <label for="dateTB">Дата проверки знаниий по охране труда: </label>
-                <input type="date" id="dateTB" name="dateTB"/>
-        </p>
-        <p>     <label for="dateTBNext">Дата следующей проверки знаниий по охране труда: </label>
-                <input type="date" id="dateTBNext" name="dateTBNext"/>
-        </p>
-        
-        <p>     <label for="dateMed">Дата медицинской проверки: </label>
-                <input type="date" id="dateMed" name="dateMed"/>
-        </p>
-        <p>     <label for="dateMedNext">Дата следующей медицинской проверки: </label>
-                <input type="date" id="dateMedNext" name="dateMedNext"/>
-        </p>
-        
-        <p>Число талонов <input type="text" name="userName" placeholder="от 1 до 3" size="18" /></p>
-        
-        <p><button type="submit">Отправить</button></p>
-        
-   </div>
-   
- </body>
+    <h1>Введите данные</h1>
+    <form method="post">
+        <label>Имя</label><br>
+        <input type="text" name="userName" /><br><br>
+        <label>Возраст</label><br>
+        <input type="number" name="userAge" /><br><br>
+        <input type="submit" value="Отправить" />
+    </form>
+</body>
 </html>
+       
