@@ -1,9 +1,12 @@
-const promise1 = new Promise((resolve) => {
-    setTimeout(resolve, 500, "Hello");
-});
-const promise2 = new Promise((resolve) => {
-    setTimeout(resolve, 100, "World");
-});
-Promise.race([promise1, promise2])
-    .then(value => console.log(value))       // Hello
-    .catch(error => console.log(error));
+function sum(x, y){ 
+    return new Promise(function(resolve){
+        const result = x + y;
+        resolve(result);
+    });
+}
+
+async function calculate(){
+    const value = await sum(5, 3);
+    console.log("Результат асинхронной операции:", value);
+}
+calculate();
