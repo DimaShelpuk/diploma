@@ -1,17 +1,12 @@
 const express = require("express");
-   
+
+// создаем объект приложения
 const app = express();
-   
-// создаем парсер для данных application/x-www-form-urlencoded
-const urlencodedParser = express.urlencoded({extended: false});
-  
-app.get("/", function (_, response) {
-    response.sendFile(__dirname + "/index.html");
+// определяем обработчик для маршрута "/"
+app.get("file:///C:/Users/37529/diploma/index.html", function(request, response){
+     
+    // отправляем ответ
+    response.send("<h2>Привет Express!</h2>");
 });
-app.post("/", urlencodedParser, function (request, response) {
-    if(!request.body) return response.sendStatus(400);
-    console.log(request.body);
-    response.send(`${request.body.userName} - ${request.body.userAge}`);
-});
-   
-app.listen(3000, ()=>console.log("Сервер запущен..."));
+// начинаем прослушивать подключения на 3000 порту
+app.listen(3000);
