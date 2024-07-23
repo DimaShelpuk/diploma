@@ -1,0 +1,25 @@
+Привет из белаза епт:)
+
+Имя*
+dima
+
+Имя пользователя*
+dima
+пароль
+yL4fK3qC1x
+185.9.147.250 188.127.225.38
+https://shared-29.smartape.ru/user311020/phpmyadmin/
+
+https://wgbteam.ru/dima/index.html
+
+Настройка FTP-клиента - dima
+Учетная запись
+dima
+пароль
+yL4fK3qC1x
+Адрес FTP-сервера
+185.9.147.250
+Порт FTP-сервера
+21
+
+Скачать FileZilla (Windows)
