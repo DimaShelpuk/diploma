@@ -1,9 +1,41 @@
-const http = require('http');
-let server = http.createServer((req, res) => {
-     res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'})
-     res.end("hellow dima")
-})
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = 3000;
 
 
+// Используем body-parser для парсинга данных формы
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('style'))
+app.get("/", function (_, response) {
+    response.sendFile(__dirname + "/index.html");
+});
 
-server.listen(3000, function(){ console.log("Сервер запущен по адресу http://localhost:3000")});
+// Обрабатываем POST-запросы на /check-user
+app.post('/check-user', (req, res) => {
+    const userData = {
+        userName: req.body.userName,
+        userPhone: req.body.userPhone,
+        discharge: req.body.discharge,
+        electroGroup: req.body.electroGroup,
+        workshop: req.body.workshop,
+        email: req.body.email,
+        dateTB: req.body.dateTB,
+        dateTBNext: req.body.dateTBNext,
+        dateMed: req.body.dateMed,
+        dateMedNext: req.body.dateMedNext,
+        userTalon: req.body.userTalon,
+    };
+
+    // Здесь вы можете выполнять дополнительные действия, например, сохранять данные в БД
+    console.log(userData);
+
+    // Отправляем ответ
+    res.send('Данные пользователя успешно получены.');
+});
+
+// Запускаем сервер
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на http://localhost:${PORT}`);
+});
