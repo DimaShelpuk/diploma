@@ -2,12 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+app.set('view engine', 'ejs');
 const PORT = 3000;
 
 
 // Используем body-parser для парсинга данных формы
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('style'))
+
 app.get("/", function (_, response) {
     response.sendFile(__dirname + "/index.html");
 });
@@ -32,7 +34,7 @@ app.post('/check-user', (req, res) => {
     console.log(userData);
 
     // Отправляем ответ
-    res.send('Данные пользователя успешно получены.');
+    res.render('app',{userData});
 });
 
 // Запускаем сервер
