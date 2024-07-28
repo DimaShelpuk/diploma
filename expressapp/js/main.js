@@ -1,11 +1,11 @@
-const form = document.getElementById('blank');
-form.addEventListener('submit', saveArticle);
+const blankDateTB = document.blank.dateTB;
+const blankdateTBNext = document.blank.dateTBNext;
+const submit = blank.submit;
+submit.addEventListener("click", validate);
 
-function saveArticle (event) {
-    event.preventDefault();
-    const myFormData = new FormData(form);
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:3000/check-user");
-    xhr.send(myFormData);
+function validate(){
+    if(blankDateTB.value > blankdateTBNext.value){
+        blank.dateTB.setCustomValidity("Data is not valid");
+    }
     
 }
