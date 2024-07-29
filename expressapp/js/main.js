@@ -1,11 +1,21 @@
-const blankDateTB = document.blank.dateTB;
-const blankdateTBNext = document.blank.dateTBNext;
-const submit = blank.submit;
-submit.addEventListener("click", validate);
+function validateDates() {
+            const dateTB = document.getElementById("dateTB").value;
+            const dateTBNext = document.getElementById("dateTBNext").value;
+            const dateMed = document.getElementById("dateMed").value;
+            const dateMedNext = document.getElementById("dateMedNext").value;
 
-function validate(){
-    if(blankDateTB.value > blankdateTBNext.value){
-        blank.dateTB.setCustomValidity("Data is not valid");
-    }
+            if (dateTB && dateTBNext) {
+                if (new Date(dateTBNext) < new Date(dateTB)) {
+                    alert("Дата следующей проверки не может быть позже даты предыдущей проверки!");
+                    return false; // Предотвращаем отправку формы
+                }
+            }
+            if (dateMed && dateMedNext) {
+                if (new Date(dateMedNext) < new Date(dateMed)) {
+                    alert("Дата следующей медицинской проверки не может быть позже даты предыдущей проверки!");
+                    return false; // Предотвращаем отправку формы
+                }
+            }
+                return true; // Позволяем отправку формы
     
-}
+        }

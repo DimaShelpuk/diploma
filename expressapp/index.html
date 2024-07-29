@@ -8,9 +8,9 @@
 </head>
 
 <body>
-   <form id= "blank" method="post" action="http://localhost:3000/check-user">
+   <form id= "blank" method="post" action="http://localhost:3000/check-user" onsubmit="return validateDates()">
       <h3>Создание бланка</h3> 
-       <p>ФИО <input type="text" name="userName" placeholder="Введите ФИО" size="18" autocomplete="on" maxlength="20" minlength="3" required></p>
+       <p>ФИО <input type="text" name="userName" placeholder="Введите ФИО" size="18" autocomplete="on" maxlength="35" minlength="10" required></p>
        <p>Должность <input type="text" name="userPhone" placeholder="Введите должность" size="18" maxlength="20" minlength="3" required></p>
         <p>Разряд(если таковой имеется) <input type="radio" value="2" checked name="discharge" autocomplete="on"/>2 
                                         <input type="radio" value="3" checked name="discharge" autocomplete="on"/>3 
@@ -36,10 +36,10 @@
         <p>Электронный адрес(почта) <input type="email" placeholder="user@gmail.com" id="email" name="email" autocomplete="on"required></p>
         
         <p>     <label for="dateTB">Дата проверки знаниий по охране труда: </label>
-                <input type="date" id="dateTB" name="dateTB" autocomplete="on" required>
+                <input type="date" id="dateTB" name="dateTB" autocomplete="on" required >
         </p>
         <p>     <label for="dateTBNext">Дата следующей проверки знаниий по охране труда: </label>
-                <input type="date" id="dateTBNext" name="dateTBNext" autocomplete="on" required>
+                <input type="date" id="dateTBNext" name="dateTBNext" autocomplete="on" required >
         </p>
         
         <p>     <label for="dateMed">Дата медицинской проверки: </label>
@@ -54,6 +54,7 @@
         <p><button type="submit">Отправить</button></p>
         
     </form>
-    <script src="js/main.js"></script>
+    <script src="/main.js">
+    </script>
  </body>
 </html>
