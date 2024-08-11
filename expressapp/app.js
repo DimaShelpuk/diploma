@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const mysql = require("mysql2");
 const app = express();
 app.set('view engine', 'ejs');
 const PORT = 3000;
@@ -31,8 +31,40 @@ app.post('/check-user', (req, res) => {
         userTalon: req.body.userTalon,
     };
 
-    // Здесь вы можете выполнять дополнительные действия, например, сохранять данные в БД
+    //  сохраняем данные в БД
+    const connection = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        database: "test",
+        password: "potyer29061934F"
+        });
+    
+    // тестирование подключения
+    
+    connection.connect(function(err){
+        if (err) {
+            return console.error("Ошибка: " + err.message);
+        }
+        else{
+        console.log("Подключение к серверу MySQL успешно установлено");
+        }
+    });
+    
+    const sql = "INSERT INTO users(name,  worktype, dicharge, electroGroup, workshop, email, dateTB, dateTBNext, dateMed, dateMedNext, userTalon) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const userInfo = Object.values(userData);
+    
+    // закрытие подключения
+    connection.query(sql, userInfo, function(err, results) {
+        if(err) console.log(err);
+        else console.log("Данные добавлены");
+    });
     console.log(userData);
+    connection.end(function(err) {
+        if (err) {
+            return console.log("Ошибка: " + err.message);
+        }
+        console.log("Подключение закрыто");
+        });
 
     // Отправляем ответ
     res.render('app',{userData});
