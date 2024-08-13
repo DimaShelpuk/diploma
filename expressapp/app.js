@@ -53,22 +53,67 @@ app.post('/check-user', (req, res) => {
     const sql = "INSERT INTO users(name,  worktype, dicharge, electroGroup, workshop, email, dateTB, dateTBNext, dateMed, dateMedNext, userTalon) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const userInfo = Object.values(userData);
     
-    // закрытие подключения
+    
     connection.query(sql, userInfo, function(err, results) {
         if(err) console.log(err);
         else console.log("Данные добавлены");
     });
+    
     console.log(userData);
+    
+    // закрытие подключения
     connection.end(function(err) {
         if (err) {
             return console.log("Ошибка: " + err.message);
         }
         console.log("Подключение закрыто");
         });
+    
 
     // Отправляем ответ
     res.render('app',{userData});
 });
+
+app.get('/page/:id', function (req, res) => {
+    const id = req.params.id;
+        
+    const connection = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        database: "test",
+        password: "potyer29061934F"
+        });
+    
+    // тестирование подключения
+    
+    connection.connect(function(err){
+        if (err) {
+            return console.error("Ошибка: " + err.message);
+        }
+        else{
+        console.log("Подключение к серверу MySQL для получения данных успешно установлено");
+        }
+    });
+
+    connection.query('SELECT * FROM users WHERE id = ?', [id], (err, results) => {
+        if (err) {
+            res.status(500).send('Error fetching data');
+            return;
+        }
+    });
+    
+    // закрытие подключения
+    connection.end(function(err) {
+        if (err) {
+            return console.log("Ошибка: " + err.message);
+        }
+        console.log("Подключение закрыто");
+    });
+    
+    res.render('app',{userData})
+
+});
+
 
 // Запускаем сервер
 app.listen(PORT, () => {
