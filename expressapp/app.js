@@ -58,7 +58,9 @@ app.post('/check-user', (req, res) => {
         if(err) console.log(err);
         else console.log("Данные добавлены");
     });
+    
     console.log(userData);
+    
     connection.end(function(err) {
         if (err) {
             return console.log("Ошибка: " + err.message);
