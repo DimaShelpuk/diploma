@@ -5,6 +5,8 @@ const { format, parseISO } = require('date-fns');
 const bcrypt = require('bcrypt');
 const qr = require('qr-image');
 const nodemailer = require('nodemailer');
+const path = require('path');
+const NodeWebcam = require('node-webcam');
 const app = express();
 app.set('view engine', 'ejs');
 const PORT = 3000;
@@ -12,9 +14,12 @@ const PORT = 3000;
 
 // Используем body-parser для парсинга данных формы
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('style'));
+app.use(express.static(path.join(__dirname, 'style')));
+app.use(express.static(path.join(__dirname, 'photos')));
 app.use(express.static('js'));
 
+const webcam = NodeWebcam.create({});
+const photosFolderPath = path.join(__dirname, 'photos');
 
 const pool = mysql.createPool({
     host: "localhost",
@@ -243,6 +248,20 @@ app.post('/check-user', (req, res) => {
       });
     };
     
+    // Функция для поиска ID пользователя
+    const selectIdUser = (sql2, userArr) => {
+        return new Promise((resolve, reject) => {
+            connection.query(sql2, userArr, function(err, results) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    };
+    
+    
     // Ожидание выполнения запроса
     insertUser(sql, userInfo)
         .then(result => {
@@ -256,6 +275,7 @@ app.post('/check-user', (req, res) => {
         .then(result => {
             if (result.length > 0) {
                 const id = result[0].id; // Получаем id пользователя
+                
                 console.log("ID найден:", id);
                 const urlInfo = "http://localhost:3000/page/";
                 const url = urlInfo + String(id);
@@ -272,101 +292,121 @@ app.post('/check-user', (req, res) => {
                     console.log('Failed to generate QR Code');
                 }
                 
+                
+                const userid = {
+                    photoID: id
+                }
+                
+                res.render('startPhoto', { userid });
+                
             } else {
                 console.log("Пользователь не найден");
+                connection.end(function(err) {
+                    if (err) {
+                        return console.log("Ошибка: " + err.message);
+                    }
+                    console.log("Подключение закрыто");
+                });
             }
         })
-    
         .catch(err => {
             console.log("Ошибка:", err);
         })
     
-        .finally(() => {
-            // Закрытие подключения
-            connection.end(function(err) {
-                if (err) {
-                    return console.log("Ошибка: " + err.message);
-                }
-                console.log("Подключение закрыто");
-            });
-        });
-
-    // Функция для поиска ID пользователя
-    const selectIdUser = (sql2, userArr) => {
-        return new Promise((resolve, reject) => {
-            connection.query(sql2, userArr, function(err, results) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(results);
-                }
-            });
-        });
-    };
-    
-    // Отправляем ответ
-    res.render('app', { userData });
 });
 
 
 app.get('/page/:id', function (req, res) {
-    const id = parseInt(req.params.id);
-    
-    console.log(id);
-    
-    connection.connect(function(err){
-        if (err) {
-            return console.error("Ошибка: " + err.message);
-        }
-        console.log("Подключение к серверу MySQL для получения данных успешно установлено");
-    });
-    
-    const sql = "SELECT * FROM users WHERE id = ?";
-
-    connection.query(sql, [id], (err, results) => {
-        if (err) {
-            connection.end();
-            return res.status(500).send('Error fetching data');
-        }
+    try {
+        const id = parseInt(req.params.id);
         
-        if (results.length === 0) {
-            connection.end();
-            return res.status(404).send('User not found');
-        }
-
-        const user = results[0];
+        console.log(id);
         
-        function dateTransform(str) {
-            let date = new Date(str);
-            return format(date, 'yyyy-MM-dd');
-        }
-        
-        const dateArray = [dateTransform(user.dateTB), dateTransform(user.dateTBNext), dateTransform(user.dateMed),  dateTransform(user.dateMedNext)];
-        
-        const userData = {
-            userName: user.name,
-            userPhone: user.worktype,
-            discharge: user.dicharge,
-            electroGroup: user.electroGroup,
-            workshop: user.workshop,
-            email: user.email,
-            dateTB: dateArray[0],
-            dateTBNext: dateArray[1],
-            dateMed: dateArray[2],
-            dateMedNext: dateArray[3],
-            userTalon: user.userTalon
-        };
-        
-        console.log(userData);
-        
-        connection.end(function(err) {
+        connection.connect(function(err){
             if (err) {
-                return console.log("Ошибка: " + err.message);
+                throw err;
             }
-            console.log("Подключение закрыто");
+            console.log("Подключение к серверу MySQL для получения данных успешно установлено");
         });
+        
+        const sql = "SELECT * FROM users WHERE id = ?";
 
-        res.render('app', { userData });
+        connection.query(sql, [id], (err, results) => {
+            if (err) {
+                connection.end(function(err) {
+                    if (err) {
+                        console.log("Ошибка: " + err.message);
+                    }
+                    console.log("Подключение закрыто");
+                });
+                throw err;
+            }
+            
+            if (results.length === 0) {
+                connection.end(function(err) {
+                    if (err) {
+                        console.log("Ошибка: " + err.message);
+                    }
+                    console.log("Подключение закрыто");
+                });
+                throw new Error('Пользователь не найден');
+            }
+
+            const user = results[0];
+            
+            function dateTransform(str) {
+                let date = new Date(str);
+                return format(date, 'yyyy-MM-dd');
+            }
+            
+            const dateArray = [dateTransform(user.dateTB), dateTransform(user.dateTBNext), dateTransform(user.dateMed),  dateTransform(user.dateMedNext)];
+            
+            const userData = {
+                userName: user.name,
+                userPhone: user.worktype,
+                discharge: user.dicharge,
+                electroGroup: user.electroGroup,
+                workshop: user.workshop,
+                email: user.email,
+                dateTB: dateArray[0],
+                dateTBNext: dateArray[1],
+                dateMed: dateArray[2],
+                dateMedNext: dateArray[3],
+                userTalon: user.userTalon
+            };
+            
+            console.log(userData);
+            
+            res.render('app', { userData });
+            
+            connection.end(function(err) {
+                if (err) {
+                    console.log("Ошибка: " + err.message);
+                }
+                console.log("Подключение закрыто");
+            });
+            
+        });
+    } catch (err) {
+        res.status(500).send('Ошибка: ' + err.message);
+    }
+});
+
+app.get('/photo/:id', function (req, res) {
+    const numPicture = parseInt(req.params.id);
+    const fileName = "face" + numPicture + ".jpg";
+
+    webcam.capture(path.join(photosFolderPath, fileName), (err, data) => {
+        if (err) {
+          res.status(500).send('Error capturing image');
+        } else {
+            
+          const userObj = { 
+              number: numPicture,
+              fileName: fileName
+          };
+          res.render('selectPhoto', { userObj });
+        }
     });
 });
 
