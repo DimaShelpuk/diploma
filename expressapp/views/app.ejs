@@ -9,23 +9,29 @@
 
 <body>
    <form id= "blank" >
-      <h3>Бланк удостоверения</h3> 
+     <div>
+      <h3>Бланк удостоверения</h3>
        <p><b> <%=userData.userName %></b></p>
-       <p>Должность: <b><%=userData.userPhone%></b></p>
-        <p>Разряд: <b><%=userData.discharge%></b></p>
+         <p>Должность: <u><b><%=userData.userPhone%></b></u></p>
+         <p>Разряд: <u><b><%=userData.discharge%></b></u></p>
         <p>Группа по электробезопасности: <b><%=userData.electroGroup%></b></p>
-        <p>Цех работника: <b><%=userData.workshop%></b> </p>
+         <p>Цех работника: <u><b><%=userData.workshop%></b></u> </p>
    
-        <p>Электронный адрес(почта): <b><%=userData.email%></b> </p>
+         <p>Электронный адрес(почта): <u><b><%=userData.email%></b></u> </p>
         
-        <p>Дата проверки знаниий по охране труда: <b><%=userData.dateTB%></b></p>
+         <p>Дата проверки знаниий по охране труда: <u><b><%=userData.dateTB%></b></u></p>
         
-        <p>Дата следующей проверки знаниий по охране труда: <b><%=userData.dateTBNext%></b></p>
+         <p>Дата следующей проверки знаниий по охране труда: <u><b><%=userData.dateTBNext%></b></u></p>
         
-        <p>Дата медицинской проверки: <b><%=userData.dateMed%></b></p>
-        <p>Дата следующей медицинской проверки: <b><%=userData.dateMedNext%></b> </p>
+         <p>Дата медицинской проверки: <u> <b><%=userData.dateMed%></b></u></p>
+         <p>Дата следующей медицинской проверки: <u><b><%=userData.dateMedNext%></b></u> </p>
         
-        <p>Число талонов: <b><%=userData.userTalon%></b></p>
+         <p>Число талонов: <u><b><%=userData.userTalon%></b></u></p>
+      </div>
+        <div>
+           <p><img class="logo" src="/res/brestenergo.jpg" /></p>
+           <p><img class="picture" src="/<%= userData.fileName %>" /></p>
+        </div>
     </form>
    
    

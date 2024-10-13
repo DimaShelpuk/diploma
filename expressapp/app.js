@@ -361,6 +361,8 @@ app.get('/page/:id', function (req, res) {
             
             const dateArray = [dateTransform(user.dateTB), dateTransform(user.dateTBNext), dateTransform(user.dateMed),  dateTransform(user.dateMedNext)];
             
+            const filePhoto = "face" + id + ".jpg";
+            
             const userData = {
                 userName: user.name,
                 userPhone: user.worktype,
@@ -372,7 +374,8 @@ app.get('/page/:id', function (req, res) {
                 dateTBNext: dateArray[1],
                 dateMed: dateArray[2],
                 dateMedNext: dateArray[3],
-                userTalon: user.userTalon
+                userTalon: user.userTalon,
+                fileName: filePhoto
             };
             
             console.log(userData);
