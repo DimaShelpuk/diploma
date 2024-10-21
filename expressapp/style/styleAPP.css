@@ -1,8 +1,6 @@
-/* Основные стили */
 body {
     font-family: 'Arial', sans-serif;
-    background: -webkit-linear-gradient(360deg, #d595ee,#ffbcb7,#f0eee9);
-    background: linear-gradient(360deg, #d595ee,#ffbcb7,#f0eee9);
+    background: linear-gradient(135deg, #d595ee, #ffbcb7, #f0eee9);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -13,77 +11,81 @@ body {
 
 #blank {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
     width: 100%;
-    max-width: 800px; /* Установите максимальную ширину формы, если необходимо */
-    padding: 20px;
+    padding: 40px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#blank > div:first-child {
+    flex: 1;
+}
+
+#blank > div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo {
+    max-width: 150px; /* Логотип меньше основной картинки */
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.picture {
+    max-width: 220px; /* Основная картинка больше логотипа */
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo:hover, .picture:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 h3 {
     color: #333;
-    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-/* Стилизация полей ввода */
-input[type="text"],
-input[type="email"],
-input[type="date"],
-
-button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* Добавляет padding в общую ширину элемента */
-}
-
-/* Стилизация радиокнопок */
-input[type="radio"] {
-    margin-right: 5px;
-}
-
-/* Стилизация кнопки отправки */
-button {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #4cae4c;
-}
-
-/* Стилизация плейсхолдера */
-::placeholder {
-    color: #999;
+p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 600px) {
-    body {
-        padding: 10px;
+    #blank {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .blank {
-        width: auto;
-        padding: 15px;
+    #blank > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="date"],
-    button,
-    input[type="radio"] {
-        width: auto;
-        margin-bottom: 15px;
+    .logo, .picture {
+        margin: 10px 0;
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 20px;
     }
 }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Safety work</title>
+    <link rel="stylesheet" href="/styleStartPhoto.css">
+    <link rel="shortcut icon" href="/res/icon.png"/>
+</head>
+
+<body>
+   <form id="blank" action="http://localhost:3000/page/<%= userObj.number %>" method="get">
+        <h3>А теперь добавим ваше фото</h3>
+        <img class="picture" src="/<%= userObj.fileName %>"/>
+        <button class="btnAddphoto" type="reset" onclick="location.reload()" >сделать снимок</button>
+        <button class="btn" type="submit" >добавить фото</button> 
+    </form>
+ </body>
+</html>

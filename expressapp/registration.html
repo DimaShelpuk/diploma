@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в систему</title>
+    <link rel="stylesheet" href="/styleAdmin.css">
+    <link rel="shortcut icon" href="/res/icon.png"/>
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация пользователя</h1>
+        <p>Введите данные пользователя, чтобы продолжить.</p>
+        <form action="http://localhost:3000/regAdmin" method="POST" class="login-form">
+            <input type="text" name="email" placeholder="Электронная почта" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <input type="password" name="hashpass" placeholder="Код верификации" required>
+            <button type="submit">Зарегестрироваться</button>
+        </form>
+    </div>
+</body>
+</html>
