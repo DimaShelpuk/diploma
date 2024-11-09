@@ -69,7 +69,7 @@ app.get("/registration", function (_, response) {
  
 app.post('/regAdmin', async (req, res) => {
     
-    const storedHashedPassword = "$2b$10$2ODPnE6c/5.aeUvI4LC.X.3wbfaspuq2EhSebwn8PH3Yw2nNiSrWa";
+    const storedHashedPassword = "$2a$10$guTDOKGqzkyVLrEkVgE9ZO2ZWTAjlj0PKls4SgCrD9wd9Z/HDD3DW";
     const userInputPassword = req.body.hashpass;
     
     const userData = {
