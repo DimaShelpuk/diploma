@@ -61,6 +61,14 @@ app.get("/", function (_, response) {
     response.sendFile(__dirname + "/admin.html");
 });
 
+app.get("/choiceAdd", function (_, response) {
+    response.sendFile(__dirname + "/index.html");
+});
+
+app.get("/choiceDel", function (_, response) {
+    response.sendFile(__dirname + "/");
+});
+
 app.get("/registration", function (_, response) {
     
     response.sendFile(__dirname + "/registration.html");
@@ -147,7 +155,7 @@ app.post('/login', async (req, res) => {
 
             if (result) {
                 console.log("Аутентификация пройдена");
-                res.sendFile(__dirname + "/index.html");
+                res.sendFile(__dirname + "/choice.html");
             } else {
                 console.log("Аутентификация не пройдена");
                 res.render('fail');
