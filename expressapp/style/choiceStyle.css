@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background: -webkit-linear-gradient(360deg, #d595ee,#ffbcb7,#f0eee9);
+    background: linear-gradient(360deg, #d595ee,#ffbcb7,#f0eee9);
+    margin: 0;
+    padding: 20px;
+    display: flex; /* Используем Flexbox */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    height: 100vh; /* Задаем высоту в 100% от высоты окна */
+}
+
+/* Стили для кнопок */
+button {
+    background-color: #007bff; /* Цвет фона кнопок */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем рамку */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    font-size: 25px; /* Размер шрифта */
+    cursor: pointer; /* Курсор в виде указателя */
+    transition: background-color 0.3s, transform 0.2s; /* Плавные переходы */
+}
+
+/* Эффект при наведении на кнопку */
+button:hover {
+    background-color: #0056b3; /* Цвет фона при наведении */
+    transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+
+/* Эффект при нажатии на кнопку */
+button:active {
+    transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+}
+
+/* Стили для выравнивания кнопок */
+button + button {
+    margin-left: 10px; /* Отступ между кнопками */
+}
+
