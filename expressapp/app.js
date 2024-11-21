@@ -66,7 +66,41 @@ app.get("/choiceAdd", function (_, response) {
 });
 
 app.get("/choiceDel", function (_, response) {
-    response.sendFile(__dirname + "/");
+    response.sendFile(__dirname + "/delete.html");
+});
+
+app.post('/delete', async (req, res) => {
+    const userDelete = { 
+        userName: req.body.userName, 
+        jobTitle: req.body.userPhone, 
+        workshop: req.body.workshop
+    };
+    
+    const sql = "DELETE FROM users WHERE name = ? AND worktype = ? AND workshop = ?"; 
+    const userInfo = [userDelete.userName, userDelete.jobTitle, userDelete.workshop];
+    
+    const deleteUser  = (sql, userInfo) => {
+        return new Promise((resolve, reject) => {
+            connection.query(sql, userInfo, function(err, results) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results); 
+                }
+            });
+        });
+    };
+
+    try {
+        console.log("Параметры для удаления:", userInfo);
+        const result = await deleteUser (sql, userInfo); // Вызов функции
+        console.log("Данные удалены", result);
+        res.render('successfulDel'); // Успешный ответ
+    } catch (err) {
+        console.error("Ошибка: " + err.message);
+        res.status(500).send("Ошибка при удалении данных"); // Ответ в случае ошибки
+        
+    }
 });
 
 app.get("/registration", function (_, response) {

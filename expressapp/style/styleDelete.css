@@ -1,24 +1,24 @@
 /* Основные стили */
 body {
     font-family: 'Arial', sans-serif;
-    background: -webkit-linear-gradient(360deg, #d595ee,#ffbcb7,#f0eee9);
-    background: linear-gradient(360deg, #d595ee,#ffbcb7,#f0eee9);
+    background: -webkit-linear-gradient(360deg, #d595ee, #ffbcb7, #f0eee9);
+    background: linear-gradient(360deg, #d595ee, #ffbcb7, #f0eee9);
     margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0; /* Убираем отступы по умолчанию */
+    height: 100vh; /* Устанавливаем высоту на 100% высоты окна */
+    display: flex; /* Используем flexbox для центрирования содержимого */
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center; /* Вертикальное центрирование */
 }
 
 #blank {
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    width: 100%;
-    max-width: 800px; /* Установите максимальную ширину формы, если необходимо */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    box-sizing: border-box;
+    max-width: 500px;
+    width: 100%; /* Устанавливаем ширину на 100% для адаптивности */
+    margin: auto; /* Центрируем контейнер по горизонтали */
 }
 
 h3 {
@@ -30,7 +30,6 @@ h3 {
 input[type="text"],
 input[type="email"],
 input[type="date"],
-
 button {
     width: 100%;
     padding: 10px;
@@ -51,11 +50,11 @@ button {
     color: white;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s red;
 }
 
 button:hover {
-    background-color: #4cae4c;
+    background-color: red;
 }
 
 /* Стилизация плейсхолдера */
@@ -69,8 +68,8 @@ button:hover {
         padding: 10px;
     }
 
-    .blank {
-        width: auto;
+    #blank {
+        width: auto; /* Убираем фиксированную ширину для мобильных устройств */
         padding: 15px;
     }
 
@@ -79,7 +78,7 @@ button:hover {
     input[type="date"],
     button,
     input[type="radio"] {
-        width: auto;
+        width: auto; /* Убираем фиксированную ширину для мобильных устройств */
         margin-bottom: 15px;
     }
 

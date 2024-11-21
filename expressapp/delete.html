@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Safety work</title>
+    <link rel="stylesheet" href="/styleDelete.css">
+    <link rel="shortcut icon" href="/res/icon.png"/>
+</head>
+
+<body>
+   <form id= "blank" method="post" action="http://localhost:3000/delete">
+      <h3>Введите данные пользователя для удаления</h3> 
+       <p>ФИО <input type="text" name="userName" placeholder="Введите ФИО" size="18" autocomplete="on" maxlength="35" minlength="10" required></p>
+       <p>Должность <input type="text" name="userPhone" placeholder="Введите должность" size="18" maxlength="20" minlength="3" required></p>
+        <p>Цех работника                 <input type="radio" value="Электроцех" checked name="workshop" autocomplete="on"/>Электроцех 
+                                         <input type="radio" value="ЦЦР" checked name="workshop" autocomplete="on"/>ЦЦР
+                                         <input type="radio" value="ЦТПКиРСР " checked name="workshop" autocomplete="on"/>ЦТПКиРСР 
+                                         <input type="radio" value="Хим цех " checked name="workshop" autocomplete="on"/>Хим цех 
+                                         <input type="radio" value="КТЦ" checked name="workshop" autocomplete="on"/>КТЦ
+                                         <input type="radio" value="ОНиОТ" checked name="workshop" autocomplete="on"/>ОНиОТ
+                                         <input type="radio" value="УБНФу" checked name="workshop" autocomplete="on"/>УБНФУ
+                                         <input type="radio" value="Управление" checked name="workshop" autocomplete="on"/>Управление
+                                         <input type="radio" value="ЛКМиС" checked name="workshop" autocomplete="on"/>ЛКМиС
+                                         <input type="radio" value="ПТО" checked name="workshop" autocomplete="on"/>ПТО
+                                         </p>
+        <p><button type="submit">Удалить пользователя </button></p>
+        
+    </form>
+ </body>
+</html>
